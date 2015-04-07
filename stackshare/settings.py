@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from scrapy.settings.default_settings import ITEM_PIPELINES
+
 
 # Scrapy settings for stackshare project
 #
