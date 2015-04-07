@@ -13,3 +13,7 @@ class StackTypeName(scrapy.Item):
     stype=scrapy.Field()
     sname=scrapy.Field()
     
+class StackReason(scrapy.Item):
+    img_url=scrapy.Field()
+    name=scrapy.Field()
+    reason=scrapy.Field()

@@ -11,4 +11,6 @@ LOG=logging.getLogger(__name__)
 class StacksharePipeline(object):
     def process_item(self, item, spider):
         if type(item).__name__=='StackTypeName':
-            LOG.info('type:%s name:%s'%(item['stype'],item['sname']))
+            print 'TYPE:::%s   NAME:::%s '%(item['stype'],item['sname'])
+        else:
+            print item
