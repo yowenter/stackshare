@@ -16,4 +16,5 @@ class StackTypeName(scrapy.Item):
 class StackReason(scrapy.Item):
     img_url=scrapy.Field()
     name=scrapy.Field()
+    description=scrapy.Field()
     reason=scrapy.Field()
