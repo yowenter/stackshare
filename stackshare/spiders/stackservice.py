@@ -32,13 +32,14 @@ class StackserviceSpider(CrawlSpider):
         s=Soup(response.body)
         img_url=s.find('div',class_="sp-service-logo col-md-2 col-xs-12").find('img')['src']
         description=s.find('div',id="service-description").text.strip().encode('utf-8')
+        title=s.find('div',id='service-title').text.strip().encode('utf-8')
         reasons=s.find_all('div',class_='col-md-12 col-sm-6 reason_item')
         all_reasons={}
         for reason in reasons:
             count=reason.find('span',class_='reason-count').text.encode('utf-8').strip()
             text=reason.find('div',id="reason-text").text.encode('utf-8').strip()
             all_reasons[text]=count
-        yield StackReason(img_url=img_url,name=name,reason=all_reasons,description=description)
+        yield StackReason(img_url=img_url,name=name,reason=all_reasons,description=description,title=title)
             
         
         
