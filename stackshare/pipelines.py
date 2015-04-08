@@ -25,7 +25,7 @@ class StacksharePipeline(object):
     def insert_db(self,item,conn=None):
         service_id=str(uuid.uuid4())
         if get_service_by_name(item['name'], conn):
-            print 'SERVICE::%s saved.'%item['name']
+            print 'SERVICE::%s has already exists.'%item['name']
         else:
             ins=Service.insert().values(service_id=service_id,service_name=item['name'],service_title=item['title'],service_image_url=item['img_url'],
                                       service_description=item['description'],service_type='saas',category_name='SAAS_SERVICE',created_at=func.now())
@@ -33,6 +33,7 @@ class StacksharePipeline(object):
             for reason in item['reason'].items():
                 s=ServiceReason.insert().values(service_id=service_id,service_reason_name=reason[0],service_reason_count=reason[1],created_at=func.now())
                 conn.execute(s)
+            print 'SERVICE::%s has saved'%item['name']
             
             
             
