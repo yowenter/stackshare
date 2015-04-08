@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import uuid
-from sqlalchemy.sql import func
+from sqlalchemy.sql import select
+from sqlalchemy.sql.expression import func
 from stackshare.database import require_connection,Service,ServiceReason
 from database import ensure_schema
 
