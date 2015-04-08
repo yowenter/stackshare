@@ -5,7 +5,20 @@ from bs4 import BeautifulSoup as Soup
 from scrapy.contrib.spiders import CrawlSpider,Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from stackshare.items import StackTypeName,StackReason
+from stackshare.settings import FILTER_URLS
 
+def get_filter_urls():
+    urls=[]
+    with open(FILTER_URLS,'r') as f:
+        for line in f:
+            urls.append(line.strip())
+    return urls
+
+def save_url(url):
+    with open(FILTER_URLS,'a') as f:
+        f.write(url+'\n')
+
+FILTERS=get_filter_urls()
 
 class StackserviceSpider(CrawlSpider):
     name = "stackservice"
@@ -25,7 +38,11 @@ class StackserviceSpider(CrawlSpider):
                 card_name=stack.text.encode('utf-8')
                 stack_link=stack['href']
                 yield StackTypeName(stype=card_type,sname=card_name)
-                yield scrapy.Request('http://stackshare.io/'+stack_link,callback=self.parse_service)
+                link='http://stackshare.io/'+stack_link
+                if link not in FILTERS:
+                    yield scrapy.Request(link,callback=self.parse_service)
+                    save_url(link)
+                
     
     def parse_service(self,response):
         name=re.search('stackshare.io/(.*)',response.url).groups()[0]
