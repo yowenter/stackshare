@@ -1,0 +1,6 @@
+Flask >= 0.10.1
+requests == 2.2.1
+SQLAlchemy >= 0.9.4 , <= 0.9.99
+BeautifulSoup >=4.3.2
+scrapy
+MySQL-python == 1.2.5
