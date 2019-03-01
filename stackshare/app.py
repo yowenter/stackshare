@@ -10,7 +10,7 @@ app=flask.Flask(__name__)
 
 @app.route('/',methods=['GET'])
 def home_page():
-	return 'Hey,Danan!'
+	return 'Index'
 
 @app.route('/start_crawl',methods=['GET'])
 def crawl():
